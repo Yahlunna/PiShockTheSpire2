@@ -1,0 +1,5 @@
+{
+  "PISHOCKTHESPIRE2-MERCY.description": "PiShock will not trigger at the beginning of your turn.",
+  "PISHOCKTHESPIRE2-MERCY.title": "Mercy",
+  "PISHOCKTHESPIRE2-MERCY.smartDescription": "{OnPlayer:You|[gold]{OwnerName}'s[/gold]} will not suffer PiShock discharges for [green]{Amount}[/green] more enemy turns."
+}

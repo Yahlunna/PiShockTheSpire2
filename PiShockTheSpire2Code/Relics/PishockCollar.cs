@@ -19,37 +19,4 @@ public class PishockCollar() : CustomRelicModel
     public override string PackedIconOutlinePath => "pishockcollar_outline.png".RelicImagePath();
     public override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
     
-    
-    /*
-    public override string PackedIconPath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".RelicImagePath();
-        }
-    }
-
-    public override string PackedIconOutlinePath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic_outline.png".RelicImagePath();
-        }
-    }
-
-    public override string BigIconPath
-    {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigRelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".BigRelicImagePath();
-        }
-    }
-    */
-
-
-
-
 }
