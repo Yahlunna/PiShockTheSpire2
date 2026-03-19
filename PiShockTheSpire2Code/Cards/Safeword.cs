@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Models.CardPools;
 namespace PiShockTheSpire2.PiShockTheSpire2Code.Cards;
 
   
-[Pool(typeof(IroncladCardPool))]
+[Pool(typeof(TokenCardPool))]
 public class Safeword() : CustomCardModel(0, CardType.Skill,
     CardRarity.Basic, TargetType.Self)
 {
