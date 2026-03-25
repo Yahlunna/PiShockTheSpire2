@@ -1,4 +1,4 @@
 {
-  "PISHOCKTHESPIRE2-SAFEWORD.description": "[gold]Retain[/gold]\nGain {Insulation:diff()} [gold]Insulation[/gold].\n[gold]Exhaust[/gold].",
+  "PISHOCKTHESPIRE2-SAFEWORD.description": "Gain {Insulation:diff()} [gold]Insulation[/gold].",
   "PISHOCKTHESPIRE2-SAFEWORD.title": "Safeword"
 }

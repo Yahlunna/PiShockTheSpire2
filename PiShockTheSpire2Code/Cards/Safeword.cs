@@ -19,8 +19,9 @@ public class Safeword() : CustomCardModel(0, CardType.Skill,
     public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     
-    public override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<Insulation>(2m)];
+    public override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<Insulation>(1m)];
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Insulation>()];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
     
     public override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -34,8 +35,5 @@ public class Safeword() : CustomCardModel(0, CardType.Skill,
     {
         base.DynamicVars["Insulation"].UpgradeValueBy(1m);
     }
-    
-    
-    
     
 }
