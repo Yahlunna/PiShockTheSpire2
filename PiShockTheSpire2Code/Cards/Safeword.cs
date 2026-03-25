@@ -1,37 +1,38 @@
 using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
-using MegaCrit.Sts2.Core.Models.Powers;
+using PiShockTheSpire2.PiShockTheSpire2Code.Powers;
 using PiShockTheSpire2.PiShockTheSpire2Code.Utils;
 
 namespace PiShockTheSpire2.PiShockTheSpire2Code.Cards;
   
 [Pool(typeof(TokenCardPool))]
 public class Safeword() : CustomCardModel(0, CardType.Skill,
-    CardRarity.Basic, TargetType.Self)
+    CardRarity.Token, TargetType.Self)
 {
     public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-
-    //public override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<Mercy Power>(1)];  Create Power: Mercy
-    //public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Mercy Power>()]; Define Mercy
     
+    public override IEnumerable<DynamicVar> CanonicalVars => [new PowerVar<Insulation>(2m)];
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Insulation>()];
     
     public override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        // Add Mercy.
+        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await PowerCmd.Apply<Insulation>(base.Owner.Creature, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, this);
     }
 
     public override void OnUpgrade()
     {
-        //DynamicVars.Power.UpgradeValueBy(1);  (Im just guessing it will be something like this but i honestly have no idea lmao.)
+        base.DynamicVars["Insulation"].UpgradeValueBy(1m);
     }
     
     
