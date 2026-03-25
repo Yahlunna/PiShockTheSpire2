@@ -1,5 +1,5 @@
 {
   "PISHOCKTHESPIRE2-INSULATION.description": "Immune to PiShock discharges.",
   "PISHOCKTHESPIRE2-INSULATION.title": "Insulation",
-  "PISHOCKTHESPIRE2-INSULATION.smartDescription": "{OnPlayer:You are|[gold]{OwnerName}[/gold] is} immune to PiShock discharges for [green]{Amount}[/green] more turns."
+  "PISHOCKTHESPIRE2-INSULATION.smartDescription": "{OnPlayer:You are|[gold]{OwnerName}[/gold] is} immune to PiShock discharges for [green]{Amount}[/green] more {Amount:plural:turn|turns}."
 }

@@ -23,7 +23,7 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code.Relics;
 public class PishockCollar() : CustomRelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
-    public override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)]; // ?
+    public override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)]; 
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Safeword>()];
     
     
