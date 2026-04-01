@@ -1,0 +1,17 @@
+{
+  "PISHOCKTHESPIRE2.mod_title": "PiShock The Spire 2",
+  "PISHOCKTHESPIRE2-USERNAME.title": "Username",
+  "PISHOCKTHESPIRE2-USERNAME.hover.desc": "Your user name in the Pi-Shock Website.",
+  "PISHOCKTHESPIRE2-A_P_I_KEY.title": "API Key",
+  "PISHOCKTHESPIRE2-A_P_I_KEY.hover.desc": "A PiShock API Key. You can generate one in the PiShock website, in your Account menu.",
+  "PISHOCKTHESPIRE2-SHOCKER_I_D.title": "Shocker ID",
+  "PISHOCKTHESPIRE2-SHOCKER_I_D.hover.desc": "The Shocker ID that you want this mod to trigger. You can find it in your Shocker Settings. This is NOT a Hub ID.",
+  "PISHOCKTHESPIRE2-MAX_INTENSITY.title": "Maximum Intensity:",
+  "PISHOCKTHESPIRE2-MAX_INTENSITY.hover.desc": "The intensity of the discharges will never surpass this range.",
+  "PISHOCKTHESPIRE2-MAX_DURATION.title": "Maximum Duration:",
+  "PISHOCKTHESPIRE2-MAX_DURATION.hover.desc": "The lenght of the discharges will never surpass this range.",
+  "PISHOCKTHESPIRE2-ALWAYS_MAX_POWER.title": "Always shock at max power",
+  "PISHOCKTHESPIRE2-ALWAYS_MAX_POWER.hover.desc": "Shocks will always trigger at maximum intensity and duration instead of escalate based on damage taken.",
+  "PISHOCKTHESPIRE2-SEND_VIBRATION_TEST.title": "Test current shocker",
+  "PISHOCKTHESPIRE2-SEND_VIBRATION_TEST.hover.desc": "Makes the linked Shocker vibrate for a few seconds."
+}
