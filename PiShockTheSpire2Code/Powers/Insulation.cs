@@ -20,11 +20,6 @@ public class Insulation() : CustomPowerModel
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
     
-    //Todo: should scale in multiplayer? i genuinely have no idea of what does this mean.
-    //
-    // nani dafuck is public override IEnumerable<DynamicVar> CanonicalVars => [new DynamicVar("Decrement", 1m)];
-    // HoverTip ???
-    
     public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
     {
         if (side == base.Owner.Side)
