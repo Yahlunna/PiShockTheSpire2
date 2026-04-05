@@ -88,6 +88,16 @@ public class PishockCollar() : CustomRelicModel
         int range = player.Creature.MaxHp;
         return Task.CompletedTask;
     }
+    
+    
+    public override Task AfterDeath(PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        
+        return Task.CompletedTask;
+    }
 
     // TODO: ¿Does this trigger for everyone or just the player? 
     public async Task TriggerShock(int duration, int intensity)
@@ -146,7 +156,7 @@ public class PishockCollar() : CustomRelicModel
         return (int)damageIntensity;
     }
 
-
+    
 
 
 
