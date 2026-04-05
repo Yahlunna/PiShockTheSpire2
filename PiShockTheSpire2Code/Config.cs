@@ -1,3 +1,5 @@
+using PiShockTheSpire2.PiShockTheSpire2Code.Utils;
+
 namespace PiShockTheSpire2.PiShockTheSpire2Code;
 using BaseLib.Config;
 using BaseLib.Config.UI;
@@ -18,6 +20,7 @@ public class Config : SimpleModConfig
     public static double MaxDuration { get; set; } = 10f;
 
     public static bool AlwaysMaxPower { get; set; } = false;
+    public static bool DeathPenalty { get; set; } = true;
 
     public override void SetupConfigUI(Control optionContainer)
     {
@@ -25,11 +28,10 @@ public class Config : SimpleModConfig
         AddRestoreDefaultsButton(optionContainer);  
     }
 
-    [ConfigButton("Test")]
-    public void SendVibrationTest()
+    [ConfigButton("Vibrate")]
+    public async Task SendVibrationTest()
     {
-        // TODO: Test if a linked shocker works here.
+        await PiShockApiHandler.PostShockerOpAsync(1, (int)MaxDuration, (int)MaxIntensity);
     }
-
 
 }

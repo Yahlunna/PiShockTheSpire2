@@ -2,7 +2,7 @@
   "id": "PiShockTheSpire2",
   "name": "PiShockTheSpire2",
   "author": "Yahlunna",
-  "description": "Unofficial PiShock integration with Slay the Spire 2.\n\nUse the settings in the top right corner to configure your shock collar.\n\n ",
+  "description": "Unofficial PiShock integration with Slay the Spire 2.\n\nNavigate the mod settings to configure your shock collar.\n\n This mod is at beta phase. If you want to give feedback or report a bug, contact @Yahlunna via Discord.",
   "version": "v0.0.0 (beta)",
   "has_pck": true,
   "has_dll": true,
