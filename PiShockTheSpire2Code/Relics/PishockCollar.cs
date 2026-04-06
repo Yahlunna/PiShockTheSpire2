@@ -1,9 +1,8 @@
 using BaseLib.Abstracts;
-using BaseLib.Extensions;
 using BaseLib.Utils;
-using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -12,7 +11,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.ValueProps;
 using PiShockTheSpire2.PiShockTheSpire2Code.Cards;
@@ -51,15 +49,19 @@ public class PishockCollar() : CustomRelicModel
     {
         if (CombatManager.Instance.IsInProgress && target == base.Owner.Creature && result.UnblockedDamage > 0)
         {
+            // TODO: Ignore damage taken by osty
             damageTakenThisTurn += result.UnblockedDamage;
         }
         else
         {
             if (target == base.Owner.Creature && result.UnblockedDamage > 0)
             {
-                _ = TriggerShock(
-                    CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
-                    CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
+                if (LocalContext.IsMe(base.Owner))
+                {
+                    _ = TriggerShock(
+                        CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
+                        CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
+                }
             }
         }
 
@@ -73,9 +75,12 @@ public class PishockCollar() : CustomRelicModel
             if (!base.Owner.Creature.HasPower<Insulation>())
             {
                 Flash();
-                _ = TriggerShock(
-                    CalculateOperationDuration(damageTakenThisTurn, base.Owner.Creature.MaxHp),
-                    CalculateOperationIntensity(damageTakenThisTurn, base.Owner.Creature.MaxHp));
+                if (LocalContext.IsMe(base.Owner))
+                {
+                    _ = TriggerShock(
+                        CalculateOperationDuration(damageTakenThisTurn, base.Owner.Creature.MaxHp),
+                        CalculateOperationIntensity(damageTakenThisTurn, base.Owner.Creature.MaxHp));
+                }
             }
         }
         damageTakenThisTurn = 0;
@@ -99,28 +104,39 @@ public class PishockCollar() : CustomRelicModel
         return Task.CompletedTask;
     }
 
-    // TODO: ¿Does this trigger for everyone or just the player? 
+    // TODO: only trigger these functions client side, not server side.
     public async Task TriggerShock(int duration, int intensity)
     {
-        await PiShockApiHandler.PostShockerOpAsync(0, duration, intensity);
+        if (LocalContext.IsMe(base.Owner)){
+            await PiShockApiHandler.PostShockerOpAsync(0, duration, intensity);
+        }
     }
 
     public async Task TriggerVibrate(int duration, int intensity)
     {
-        await PiShockApiHandler.PostShockerOpAsync(1, duration, intensity);
+        if (LocalContext.IsMe(base.Owner))
+        {
+            await PiShockApiHandler.PostShockerOpAsync(1, duration, intensity);
+        }
     }
     
     public async Task TriggerBeep(int duration)
     {
-        await PiShockApiHandler.PostShockerOpAsync(2, duration, 0);
+        if (LocalContext.IsMe(base.Owner))
+        {
+            await PiShockApiHandler.PostShockerOpAsync(2, duration, 0);
+        }
     }
     
     public async Task TriggerMultiShock(int instances)
     {
-        for (int i = 0; i < instances; i++)
+        if (LocalContext.IsMe(base.Owner))
         {
-            await TriggerShock((int)Config.MaxDuration, (int)Config.MaxIntensity);
-            await Task.Delay((int)Config.MaxDuration + 1000);
+            for (int i = 0; i < instances; i++)
+            {
+                await TriggerShock((int)Config.MaxDuration, (int)Config.MaxIntensity);
+                await Task.Delay((int)Config.MaxDuration + 1000);
+            }
         }
     }
 
