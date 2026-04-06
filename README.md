@@ -1,7 +1,7 @@
+# PiShockTheSpire2
+
 > [!CAUTION]
 > The contents of this repository are related with the use of an adult themed toy with the explicit purpose of inflicting pain. Viewer discretion is advised.
-
-# PiShockTheSpire2
 
 Source code for the PiShock The Spire 2 mod.
 
@@ -10,23 +10,23 @@ Source code for the PiShock The Spire 2 mod.
 > This is just a wonky implementation of the mod until the StS2 Community Workshop is ready. Feel free to report any issues or give any feedback you want.
 
 
-
 ## Quick Setup Guide for PiShockTheSpire2 beta
 
 > [!Warning]
-> This mod has not been tested for multiplayer yet.
+> This mod has not been tested for multiplayer-use yet. To play multiplayer, make sure every player has the mod installed. 
 
 - **Step 0 (optional):** Set your game in the **public-beta** branch.
 
-If you are having issues running the mod in the main branch of the game, switching to the beta branch might help to solve some of them.
+If you are having issues running the mod, switching to the beta branch of StS2 might help to solve some of them.
 
 ![](https://i.imgur.com/RhH2gpo.png)
 
 - **Step 1:** Download the last version of the mod listed in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases).
 
-This mod uses BaseLib (v0.2.6) as a dependency. You can either download BaseLib from [here](https://github.com/Alchyr/BaseLib-StS2), or download the PiShockTheSpire mod with its BaseLib dependency in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases). 
+This mod uses BaseLib as a dependency. You can either download BaseLib from [here](https://github.com/Alchyr/BaseLib-StS2) before installing this mod, or download the PiShockTheSpire mod with its BaseLib dependency directly in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases). 
 
-If you are following this guide, this is probably your first time installing a StS2 mod manually, so just download the "PiShockTheSpire2withBaseLibDependency.zip" asset with the solved dependency on it. 
+If you are following this guide, this is probably your first time installing a StS2 mod manually, so I advise you to just download the "PiShockTheSpire2withBaseLibDependency.zip" asset with the solved dependency on it.
+Otherwise, if you already own BaseLib, you can just download the mod implementation in the "PiShockTheSpire2withBaseLibDependency.zip" asset.
 
 ![](https://i.imgur.com/3uQ3Qhu.png)
 
@@ -42,12 +42,12 @@ Once there, create a "mods" folder.
 
 ![](https://i.imgur.com/dJ0nFLA.png)
 
-Extract the files from "PiShockTheSpire2withBaseLibDependency.zip" into this folder. It should look like this:
+Extract the files from "PiShockTheSpire2.zip" into this folder. You will also need to keep BaseLib here. A successful instalation should look like this:
 
 ![](https://i.imgur.com/uQXrXvu.png)
 
 **Step 2:** Execute the game and make sure the mod is running:
-You can see your list of mods at Settings > General > Modding, by clicking in the Mod Settings button.
+You can see your list of mods at `Settings > General > Modding`, by clicking in the Mod Settings button.
 
 ![](https://i.imgur.com/sMEKwjR.png)
 
@@ -66,7 +66,7 @@ The configuration menu looks like this:
 ![](https://i.imgur.com/ju8EZS3.png)
 
 Feel free to adjust the parameters to your liking.
-The main 3 parameters you need to run the, mod are your Username, an API Key for your account, and the ID of the Shocker you want to use.
+The main 3 parameters you need to run this mod are your **Username**, an **API Key** for your account, and the **ID of the Shocker** you want to use.
 
 You can find your username and how to generate api keys in your PiShock Account.
 
@@ -76,12 +76,13 @@ You can find your Shocker ID in the PiShock Vault. Please, keep in mind you will
 
 ![](https://i.imgur.com/JpVaSw7.png)
 
+
 **Step 4 (Optional):** Debugging
 
- You can use the Test current Shocker button in The PiShockTheSpire2 menu to check if the Shoker has linked properly with the game.
+You can use the Test current Shocker button in The PiShockTheSpire2 menu to check if the Shoker has linked properly with the game.
 Pressing the test button will try make the Shocker vibrate at the max intensity and duration that you have configured.
 
-If your shocker is not working properly pr you want to report an issue with the mod, please send me your ingame logs (you can find them at (...\AppData\Roaming\SlayTheSpire2\logs), under the name of godot.log
+If your shocker is not working properly pr you want to report an issue with the mod, please send me your ingame logs (you can find them at `(...)\AppData\Roaming\SlayTheSpire2\logs`, under the name of godot.log
 
 **Advanced:** You can also manually debug any issue you have in the BaseLib console to check for the API response codes when a Shock operation is requested.
 
@@ -91,7 +92,7 @@ You can open an ingame console with the [`] key. On it, just type:
 
 This command opens a live log dump where you can see any relevant debug information for the game, BaseLib, PiShockTheSpire2 and other mods. Feel free to use it to track any API issue you might be experiencing.
 
-The command also opens your ingame log folder automatically with the following command
+The command also opens your ingame log folder automatically with the following command:
 
 > open logs
 
