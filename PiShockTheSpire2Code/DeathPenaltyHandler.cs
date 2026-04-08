@@ -19,7 +19,7 @@ class DeathPenaltyHandler {
     static void Postfix(bool isVictory) {
         MainFile.Logger.Info("Make Game Over Stuff happen here");
         
-        if (isVictory) 
+        if (isVictory && Config.HealingVibrates) 
         {
             _ = PiShockApiHandler.PostShockerOpAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
         }

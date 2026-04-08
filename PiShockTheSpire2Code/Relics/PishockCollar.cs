@@ -29,7 +29,7 @@ public class PishockCollar() : CustomRelicModel
     public override string PackedIconOutlinePath => "pishockcollar_outline.png".RelicImagePath();
     public override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
     
-    private int damageTakenThisTurn = 0;
+    private int _damageTakenThisTurn = 0;
     
     
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
@@ -44,67 +44,60 @@ public class PishockCollar() : CustomRelicModel
         }
     }
     
-    
     public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
         if (CombatManager.Instance.IsInProgress && target == base.Owner.Creature && result.UnblockedDamage > 0)
         {
-            // TODO: Ignore damage taken by osty
-            damageTakenThisTurn += result.UnblockedDamage;
+            _damageTakenThisTurn += result.UnblockedDamage;
         }
-        else
+        else if (target == base.Owner.Creature && result.UnblockedDamage > 0)
         {
-            if (target == base.Owner.Creature && result.UnblockedDamage > 0)
-            {
-                if (LocalContext.IsMe(base.Owner))
-                {
-                    _ = TriggerShock(
-                        CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
-                        CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
-                }
-            }
+            _ = TriggerShock(
+                CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
+                CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
         }
+        
 
         return Task.CompletedTask;
     }
     
     public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if ( damageTakenThisTurn > 0 )
+        if ( _damageTakenThisTurn > 0 )
         {
             if (!base.Owner.Creature.HasPower<Insulation>())
             {
                 Flash();
-                if (LocalContext.IsMe(base.Owner))
-                {
-                    _ = TriggerShock(
-                        CalculateOperationDuration(damageTakenThisTurn, base.Owner.Creature.MaxHp),
-                        CalculateOperationIntensity(damageTakenThisTurn, base.Owner.Creature.MaxHp));
-                }
+                
+                _ = TriggerShock(
+                    CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
+                    CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
             }
         }
-        damageTakenThisTurn = 0;
+        _damageTakenThisTurn = 0;
 
         return Task.CompletedTask;
     }
 
     public override Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
-        int range = player.Creature.MaxHp;
-        return Task.CompletedTask;
-    }
-    
-    
-    public override Task AfterDeath(PlayerChoiceContext choiceContext,
-        Creature creature,
-        bool wasRemovalPrevented,
-        float deathAnimLength)
-    {
-        
         return Task.CompletedTask;
     }
 
-    // TODO: only trigger these functions client side, not server side.
+    public override Task AfterRestSiteHeal(Player player, bool isMimicked)
+    {
+        if (player == base.Owner && Config.HealingVibrates)
+        {
+            int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
+            int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
+
+            _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
+        }
+
+        return Task.CompletedTask;
+    }
+
+
     public async Task TriggerShock(int duration, int intensity)
     {
         if (LocalContext.IsMe(base.Owner)){
@@ -146,12 +139,13 @@ public class PishockCollar() : CustomRelicModel
             return (int)Config.MaxIntensity;
         }
 
-        float damageIntensity =  ( (float)damageTaken / (float)playerMaxHp ) * (float)Config.MaxIntensity;
+        float damageRange = (float)Config.MaxIntensity - (float)Config.MinIntensity - 1.0f;
+        float damageIntensity = ((float)damageTaken / (float)playerMaxHp) * damageRange;
         
         if(damageIntensity > Config.MaxIntensity)
             damageIntensity = (float)Config.MaxIntensity;
-        else if (damageIntensity < 1.0f)
-            damageIntensity = 1.0f;
+        else if (damageIntensity < (float)Config.MinIntensity)
+            damageIntensity = (float)Config.MinIntensity;
         
         return (int)damageIntensity;
     }
@@ -162,14 +156,15 @@ public class PishockCollar() : CustomRelicModel
             return (int)Config.MaxDuration;
         }
 
-        float damageIntensity = ( (float)damageTaken / (float)playerMaxHp ) * (float)Config.MaxDuration;
+        float durationRange = (float)Config.MaxDuration - (float)Config.MinDuration - 1.0f;
+        float durationIntensity = ( (float)damageTaken / (float)playerMaxHp ) * durationRange;
         
-        if(damageIntensity > Config.MaxDuration)
-            damageIntensity = (float)Config.MaxDuration;
-        else if (damageIntensity < 1.0f)
-            damageIntensity = 1.0f;
+        if(durationIntensity > Config.MaxDuration)
+            durationIntensity = (float)Config.MaxDuration;
+        else if (durationIntensity < (float)Config.MinDuration)
+            durationIntensity = (float)Config.MinDuration;
         
-        return (int)damageIntensity;
+        return (int)durationIntensity;
     }
 
     
