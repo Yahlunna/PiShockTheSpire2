@@ -13,7 +13,7 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code;
 class AddRelicAtStart {
     [HarmonyPostfix]
     static void Postfix(IRunState runState) {
-        if (runState.CurrentActIndex == 0) 
+        if (runState.CurrentActIndex == 0 && Config.SpawnShockerRelic) 
         {
             foreach (Player player in runState.Players)
             {

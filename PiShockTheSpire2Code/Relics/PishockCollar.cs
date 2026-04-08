@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
@@ -13,6 +14,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using PiShockTheSpire2.PiShockTheSpire2Code.Cards;
 using PiShockTheSpire2.PiShockTheSpire2Code.Powers;
@@ -31,7 +33,24 @@ public class PishockCollar() : CustomRelicModel
     public override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
     
     private int _damageTakenThisTurn = 0;
+    private int _piShockTheSpire2ActiveAct = -1;
+    [SavedProperty]
+    public int PiShockTheSpire2_ActiveAct {
+        get { return _piShockTheSpire2ActiveAct; }
+        set { AssertMutable(); _piShockTheSpire2ActiveAct = value; }
+    }
     
+    public override Task AfterObtained()
+    {
+        PiShockTheSpire2_ActiveAct = base.Owner.RunState.CurrentActIndex;
+        if (Config.HealingVibrates) {
+            int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
+            int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
+
+            _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
+        }
+        return Task.CompletedTask;
+    }
     
     public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
     {
@@ -47,33 +66,25 @@ public class PishockCollar() : CustomRelicModel
     
     public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
     {
-        if (CombatManager.Instance.IsInProgress && target == base.Owner.Creature && result.UnblockedDamage > 0)
-        {
+        if (CombatManager.Instance.IsInProgress && target == base.Owner.Creature && result.UnblockedDamage > 0) {
             _damageTakenThisTurn += result.UnblockedDamage;
         }
-        else if (target == base.Owner.Creature && result.UnblockedDamage > 0)
-        {
+        else if (target == base.Owner.Creature && result.UnblockedDamage > 0) {
             _ = TriggerShock(
                 CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
                 CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
         }
-        
-
         return Task.CompletedTask;
     }
     
     public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        //Check current turn
         if (side == base.Owner.Creature.Side && !Config.TriggerSelfDamage) {
             _damageTakenThisTurn = 0;
             return Task.CompletedTask;
         }
-
-        if ( _damageTakenThisTurn > 0 )
-        {
-            if (!base.Owner.Creature.HasPower<Insulation>())
-            {
+        if ( _damageTakenThisTurn > 0 ) {
+            if (!base.Owner.Creature.HasPower<Insulation>()) {
                 Flash();
                 
                 _ = TriggerShock(
@@ -82,7 +93,6 @@ public class PishockCollar() : CustomRelicModel
             }
         }
         _damageTakenThisTurn = 0;
-
         return Task.CompletedTask;
     }
 
@@ -104,19 +114,6 @@ public class PishockCollar() : CustomRelicModel
         return Task.CompletedTask;;
     }
 
-    public override Task AfterActEntered()
-    {
-        if (Config.HealingVibrates)
-        {
-            int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
-            int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
-
-            _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
-        }
-        return Task.CompletedTask;
-    }
-
-
     public override Task AfterRestSiteHeal(Player player, bool isMimicked)
     {
         if (player == base.Owner && Config.HealingVibrates)
@@ -128,8 +125,7 @@ public class PishockCollar() : CustomRelicModel
         }
         return Task.CompletedTask;
     }
-
-
+    
     public async Task TriggerShock(int duration, int intensity)
     {
         if (LocalContext.IsMe(base.Owner)){
@@ -159,8 +155,8 @@ public class PishockCollar() : CustomRelicModel
         {
             for (int i = 0; i < instances; i++)
             {
-                await TriggerShock((int)Config.MaxDuration, (int)Config.MaxIntensity);
-                await Task.Delay((int)Config.MaxDuration + 1000);
+                await TriggerShock((int)Config.MaxDuration, (int)Config.MaxIntensity); 
+                await Task.Delay(((int)Config.MaxDuration * 1000) + 1000);
             }
         }
     }
@@ -198,9 +194,5 @@ public class PishockCollar() : CustomRelicModel
         
         return (int)durationIntensity;
     }
-
     
-
-
-
 }

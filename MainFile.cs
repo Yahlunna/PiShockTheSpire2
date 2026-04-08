@@ -20,7 +20,6 @@ public partial class MainFile : Node
         ModConfigRegistry.Register(ModId, new Config());
         Harmony harmony = new(ModId);
         harmony.PatchAll();
-        //Subscriber.subscribe();
     }
     
 }

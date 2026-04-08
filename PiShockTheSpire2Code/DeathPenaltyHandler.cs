@@ -17,15 +17,16 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code;
 class DeathPenaltyHandler {
     [HarmonyPostfix]
     static void Postfix(bool isVictory) {
-        MainFile.Logger.Info("Make Game Over Stuff happen here");
-        
-        if (isVictory && Config.HealingVibrates) 
+        if (Config.SpawnShockerRelic)
         {
-            _ = PiShockApiHandler.PostShockerOpAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
-        }
-        else if(!isVictory && Config.DeathPenalty)
-        {
-            _ = PiShockApiHandler.PostShockerOpAsync(0, (int)Config.MaxDuration, (int)Config.MaxIntensity);
+            if (isVictory && Config.HealingVibrates)
+            {
+                _ = PiShockApiHandler.PostShockerOpAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
+            }
+            else if (!isVictory && Config.DeathPenalty)
+            {
+                _ = PiShockApiHandler.PostShockerOpAsync(0, (int)Config.MaxDuration, (int)Config.MaxIntensity);
+            }
         }
     }
 }

@@ -8,8 +8,9 @@ using Godot;
 [HoverTipsByDefault]
 public class Config : SimpleModConfig
 {
-    
-    [ConfigSection("ApiConfig")]
+
+    public static bool SpawnShockerRelic { get; set; } = true;
+    [ConfigSection("ApiConfig")] 
     public static string Username { get; set; } = "undefined";
     public static string API_Key { get; set; } = "undefined";
     public static string Shocker_ID { get; set; } = "undefined";
