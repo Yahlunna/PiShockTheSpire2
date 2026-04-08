@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.RelicPools;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using PiShockTheSpire2.PiShockTheSpire2Code.Cards;
 using PiShockTheSpire2.PiShockTheSpire2Code.Powers;
@@ -63,6 +64,12 @@ public class PishockCollar() : CustomRelicModel
     
     public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
+        //Check current turn
+        if (side == base.Owner.Creature.Side && !Config.TriggerSelfDamage) {
+            _damageTakenThisTurn = 0;
+            return Task.CompletedTask;
+        }
+
         if ( _damageTakenThisTurn > 0 )
         {
             if (!base.Owner.Creature.HasPower<Insulation>())
@@ -79,10 +86,36 @@ public class PishockCollar() : CustomRelicModel
         return Task.CompletedTask;
     }
 
-    public override Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+    public override Task AfterCombatVictoryEarly(CombatRoom room)
     {
+        if (_damageTakenThisTurn > 0)
+        {
+            if (!base.Owner.Creature.HasPower<Insulation>())
+            {
+                Flash();
+                
+                _ = TriggerShock(
+                    CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
+                    CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
+            }
+        }
+        _damageTakenThisTurn = 0;
+
+        return Task.CompletedTask;;
+    }
+
+    public override Task AfterActEntered()
+    {
+        if (Config.HealingVibrates)
+        {
+            int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
+            int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
+
+            _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
+        }
         return Task.CompletedTask;
     }
+
 
     public override Task AfterRestSiteHeal(Player player, bool isMimicked)
     {
@@ -93,7 +126,6 @@ public class PishockCollar() : CustomRelicModel
 
             _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
         }
-
         return Task.CompletedTask;
     }
 
