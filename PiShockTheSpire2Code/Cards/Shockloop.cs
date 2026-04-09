@@ -31,13 +31,16 @@ public class Shockloop() : CustomCardModel(0, CardType.Skill,
             nOfMultiShocks++;
         }
 
-        IEnumerable<Creature> enumerable = from c in base.CombatState?.GetTeammatesOf(base.Owner.Creature)
-            where c != null && c.IsAlive && c.IsPlayer
-            select c;
-        foreach (Creature crtr in enumerable)
+        if (Config.AllowPunishments)
         {
-            PishockCollar? aux= crtr.Player?.GetRelic<PishockCollar>();
-            await aux?.TriggerMultiShock(nOfMultiShocks)!;
+            IEnumerable<Creature> enumerable = from c in base.CombatState?.GetTeammatesOf(base.Owner.Creature)
+                where c != null && c.IsAlive && c.IsPlayer
+                select c;
+            foreach (Creature crtr in enumerable)
+            {
+                PishockCollar? aux = crtr.Player?.GetRelic<PishockCollar>();
+                await aux?.TriggerMultiShock(nOfMultiShocks)!;
+            }
         }
     }
 

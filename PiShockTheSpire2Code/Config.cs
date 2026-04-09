@@ -30,6 +30,7 @@ public class Config : SimpleModConfig
     public static bool DeathPenalty { get; set; } = true;
     public static bool HealingVibrates { get; set; } = true;
     public static bool TriggerSelfDamage { get; set; } = true;
+    public static bool AllowPunishments { get; set; } = true;
 
     [ConfigSection("Debug")]
     [ConfigButton("Vibrate")]

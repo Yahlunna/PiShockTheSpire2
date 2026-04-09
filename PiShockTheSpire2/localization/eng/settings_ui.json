@@ -33,7 +33,10 @@
   "PISHOCKTHESPIRE2-HEALING_VIBRATES.hover.desc": "Your Shocker will vibrate when you rest in a campfire or beat the game.",
   "PISHOCKTHESPIRE2-TRIGGER_SELF_DAMAGE.title": "Stricter Combat Penalties",
   "PISHOCKTHESPIRE2-TRIGGER_SELF_DAMAGE.hover.desc": "During combat, your Shocker will also trigger at the end of your turn if you took damage during it.",
+  "PISHOCKTHESPIRE2-ALLOW_PUNISHMENTS.title": "Enable Punishment Cards",
+  "PISHOCKTHESPIRE2-ALLOW_PUNISHMENTS.hover.desc": "Allow multiplayer cards used by other players trigger your Shocker.",
 
+  
   "PISHOCKTHESPIRE2-DEBUG.title": "Debug/Sync",
   
   "PISHOCKTHESPIRE2-SEND_VIBRATION_TEST.title": "Test current Shocker",

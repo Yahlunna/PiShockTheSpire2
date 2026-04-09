@@ -116,8 +116,22 @@ public class PishockCollar() : CustomRelicModel
 
     public override Task AfterRestSiteHeal(Player player, bool isMimicked)
     {
-        if (player == base.Owner && Config.HealingVibrates)
+        if (Config.HealingVibrates && player == base.Owner)
         {
+            int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
+            int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
+
+            _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
+        }
+        return Task.CompletedTask;
+    }
+    
+    public override Task AfterRoomEntered(AbstractRoom ar)
+    {
+        if (Config.HealingVibrates && PiShockTheSpire2_ActiveAct != base.Owner.RunState.CurrentActIndex)
+        {
+            PiShockTheSpire2_ActiveAct = base.Owner.RunState.CurrentActIndex;
+            
             int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
             int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
 
