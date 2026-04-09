@@ -6,7 +6,7 @@
 Source code for the PiShock The Spire 2 mod.
 
 > [!Note]
-> This is just a wonky temporal installation guide for the mod until the StS2 Community Workshop is ready. 
+> The following text is just a wonky temporal installation guide for this mod until the StS2 Community Workshop is ready. 
 
 
 ## Quick Setup Guide for PiShockTheSpire2 beta
@@ -54,7 +54,9 @@ This should look like this:
 
 ![](https://i.imgur.com/AOzuDsT.png)
 
-
+> [!Warning]
+> If you mod Slay The Spire 2, your save fille will be safely stored and you will start your modded StS2 with a different one.
+> To restore your old safefile, simply disable all your mods in the menu above, and reset the game.
 
 **Step 3:** Configure the mod
 
