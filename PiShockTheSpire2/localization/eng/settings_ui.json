@@ -3,7 +3,7 @@
 
   "PISHOCKTHESPIRE2-API_CONFIG.title": "API Configuration",
   
-  "PISHOCKTHESPIRE2-SPAWN_SHOCKER_RELIC.title": "Spawn a PiSHock Relic at the start of each run",
+  "PISHOCKTHESPIRE2-SPAWN_SHOCKER_RELIC.title": "Spawn a PiShock Relic at the start of each run",
   "PISHOCKTHESPIRE2-SPAWN_SHOCKER_RELIC.hover.desc": "Disable this option if you want to play co-op with someone with this mod, but you don't want to use a Pi-Shock.",
   "PISHOCKTHESPIRE2-USERNAME.title": "Username",
   "PISHOCKTHESPIRE2-USERNAME.hover.desc": "Your username in the Pi-Shock Website.",

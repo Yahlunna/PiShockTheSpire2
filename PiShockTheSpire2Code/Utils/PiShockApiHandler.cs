@@ -79,7 +79,7 @@ public static class PiShockApiHandler
 
     private static int RefineDuration(int duration)
     {
-        if (duration < (int)Config.MaxDuration) return ((int)Config.MaxDuration * 1000);
+        if (duration < (int)Config.MinDuration) return ((int)Config.MinDuration * 1000);
         if (duration > (int)Config.MaxDuration) return ((int)Config.MaxDuration * 1000);
 
         return (duration * 1000);
