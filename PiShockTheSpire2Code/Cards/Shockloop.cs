@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using PiShockTheSpire2.PiShockTheSpire2Code.Powers;
 using PiShockTheSpire2.PiShockTheSpire2Code.Relics;
 using PiShockTheSpire2.PiShockTheSpire2Code.Utils;
 
@@ -38,8 +39,11 @@ public class Shockloop() : CustomCardModel(0, CardType.Skill,
                 select c;
             foreach (Creature crtr in enumerable)
             {
-                PishockCollar? aux = crtr.Player?.GetRelic<PishockCollar>();
-                await aux?.TriggerMultiShock(nOfMultiShocks)!;
+                if (!crtr.HasPower<Insulation>())
+                {
+                    PishockCollar? aux = crtr.Player?.GetRelic<PishockCollar>();
+                    await aux?.TriggerMultiShock(nOfMultiShocks)!;
+                }
             }
         }
     }

@@ -17,12 +17,12 @@ public class Config : SimpleModConfig
     
     [ConfigSection("ShockerConfig")]
     [SliderRange(1, 99)]
-    public static double MinIntensity { get; set; } = 1f;
+    public static double MinIntensity { get; set; } = 20f;
     [SliderRange(1, 100)]
     public static double MaxIntensity { get; set; } = 100f;
     [SliderRange(1, 9)]
     public static double MinDuration { get; set; } = 1f;
-    [SliderRange(1, 10)]
+    [SliderRange(1, 15)]
     public static double MaxDuration { get; set; } = 10f;
     public static bool AlwaysMaxPower { get; set; } = false;
     
@@ -33,6 +33,7 @@ public class Config : SimpleModConfig
     public static bool AllowPunishments { get; set; } = true;
 
     [ConfigSection("Debug")]
+    public static bool VerboseLogs { get; set; } = false;
     [ConfigButton("Vibrate")]
     public async Task SendVibrationTest()
     {

@@ -38,7 +38,8 @@
 
   
   "PISHOCKTHESPIRE2-DEBUG.title": "Debug/Sync",
-  
+
+  "PISHOCKTHESPIRE2-VERBOSE_LOGS.title": "Detailed Logs",
   "PISHOCKTHESPIRE2-SEND_VIBRATION_TEST.title": "Test current Shocker",
   "PISHOCKTHESPIRE2-SEND_VIBRATION_TEST.hover.desc": "Makes the target Shocker vibrate at max power."
 }

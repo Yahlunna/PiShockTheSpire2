@@ -143,6 +143,7 @@ public class PishockCollar() : CustomRelicModel
     public async Task TriggerShock(int duration, int intensity)
     {
         if (LocalContext.IsMe(base.Owner)){
+            DebugDump(intensity, duration);
             await PiShockApiHandler.PostShockerOpAsync(0, duration, intensity);
         }
     }
@@ -210,5 +211,14 @@ public class PishockCollar() : CustomRelicModel
         
         return (int)durationIntensity;
     }
-    
+
+    public void DebugDump(int intensity, int duration) {
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("------------------------------------------------------------.");
+            MainFile.Logger.Info("Registered unblocked damage taken ammounting for " + _damageTakenThisTurn + ".");
+            MainFile.Logger.Info("Attemping a shock with an intensity of " + intensity + " and a duration of " + duration + ".");
+        }
+    }
+
 }
