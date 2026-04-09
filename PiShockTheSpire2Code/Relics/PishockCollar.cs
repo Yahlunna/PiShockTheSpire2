@@ -169,6 +169,7 @@ public class PishockCollar() : CustomRelicModel
 
         float damageRange = (float)Config.MaxIntensity - (float)Config.MinIntensity - 1.0f;
         float damageIntensity = ((float)damageTaken / (float)playerMaxHp) * damageRange;
+        damageIntensity += (float)Config.MinIntensity;
         
         if(damageIntensity > Config.MaxIntensity)
             damageIntensity = (float)Config.MaxIntensity;
@@ -186,6 +187,7 @@ public class PishockCollar() : CustomRelicModel
 
         float durationRange = (float)Config.MaxDuration - (float)Config.MinDuration - 1.0f;
         float durationIntensity = ( (float)damageTaken / (float)playerMaxHp ) * durationRange;
+        durationIntensity += (float)Config.MinDuration;
         
         if(durationIntensity > Config.MaxDuration)
             durationIntensity = (float)Config.MaxDuration;
