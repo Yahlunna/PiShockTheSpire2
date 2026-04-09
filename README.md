@@ -6,14 +6,13 @@
 Source code for the PiShock The Spire 2 mod.
 
 > [!Note]
-> This mod is in beta. Errors are expected until everything is more polished.
-> This is just a wonky implementation of the mod until the StS2 Community Workshop is ready. Feel free to report any issues or give any feedback you want.
+> This is just a wonky temporal installation guide for the mod until the StS2 Community Workshop is ready. 
 
 
 ## Quick Setup Guide for PiShockTheSpire2 beta
 
 > [!Warning]
-> This mod has not been tested for multiplayer-use yet. To play multiplayer, make sure every player has the mod installed. 
+> This mod is in beta. Some errors are expected to happen while using it. Feel free to report any issues or give any feedback you want.
 
 - **Step 0 (optional):** Set your game in the **public-beta** branch.
 
