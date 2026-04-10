@@ -216,8 +216,8 @@ public class PishockCollar() : CustomRelicModel
         if (Config.VerboseLogs)
         {
             MainFile.Logger.Info("------------------------------------------------------------.");
-            MainFile.Logger.Info("Registered unblocked damage taken ammounting for " + _damageTakenThisTurn + ".");
-            MainFile.Logger.Info("Attemping a shock with an intensity of " + intensity + " and a duration of " + duration + ".");
+            MainFile.Logger.Info("Registered unblocked damage taken amounting for " + _damageTakenThisTurn + ".");
+            MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + duration + ".");
         }
     }
 
