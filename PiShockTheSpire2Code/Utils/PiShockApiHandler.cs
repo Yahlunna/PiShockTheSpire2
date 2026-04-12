@@ -30,8 +30,8 @@ public static class PiShockApiHandler
                     AgentName = "PiShockTheSpire2",
                     Operation = operation,
                     Duration = duration,
-                    Intensity = intensity,
-                    IntensityAsPercentage = true,
+                    Intensity = intensity//,
+                    //IntensityAsPercentage = true,
                 };
 
                 HttpResponseMessage response = await _client.PostAsJsonAsync(piShockUrl, payload);
