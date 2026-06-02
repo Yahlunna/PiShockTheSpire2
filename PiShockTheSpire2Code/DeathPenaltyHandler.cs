@@ -17,8 +17,7 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code;
 class DeathPenaltyHandler {
     [HarmonyPostfix]
     static void Postfix(bool isVictory) {
-        if (Config.SpawnShockerRelic)
-        {
+        // TODO: avoid triggering multiple times during online play.
             if (isVictory && Config.HealingVibrates)
             {
                 _ = PiShockApiHandler.PostShockerOpAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
@@ -27,7 +26,7 @@ class DeathPenaltyHandler {
             {
                 _ = PiShockApiHandler.PostShockerOpAsync(0, (int)Config.MaxDuration, (int)Config.MaxIntensity);
             }
-        }
+        
     }
 }
 

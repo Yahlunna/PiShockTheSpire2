@@ -5,24 +5,23 @@ using BaseLib.Config;
 using BaseLib.Config.UI;
 using Godot;
 
-[HoverTipsByDefault]
+[ConfigHoverTipsByDefault]
 public class Config : SimpleModConfig
 {
-
-    public static bool SpawnShockerRelic { get; set; } = true;
+    
     [ConfigSection("ApiConfig")] 
     public static string Username { get; set; } = "undefined";
     public static string API_Key { get; set; } = "undefined";
     public static string Shocker_ID { get; set; } = "undefined";
     
     [ConfigSection("ShockerConfig")]
-    [SliderRange(1, 99)]
+    [ConfigSlider(1, 99)]
     public static double MinIntensity { get; set; } = 20f;
-    [SliderRange(1, 100)]
+    [ConfigSlider(1, 100)]
     public static double MaxIntensity { get; set; } = 100f;
-    [SliderRange(1, 9)]
+    [ConfigSlider(1, 9)]
     public static double MinDuration { get; set; } = 1f;
-    [SliderRange(1, 15)]
+    [ConfigSlider(1, 15)]
     public static double MaxDuration { get; set; } = 10f;
     public static bool AlwaysMaxPower { get; set; } = false;
     

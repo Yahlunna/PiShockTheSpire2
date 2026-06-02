@@ -23,12 +23,23 @@ public class Safeword() : CustomCardModel(0, CardType.Skill,
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Insulation>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
     
+    
+    /*
+     * Apply<T>(
+      PlayerChoiceContext choiceContext,
+      IEnumerable<Creature> targets,
+      Decimal amount,
+      Creature? applier,
+      CardModel? cardSource,
+      bool silent = false)
+     * 
+     */
     public override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<Insulation>(base.Owner.Creature, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<Insulation>(choiceContext, base.Owner.Creature, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, this);
     }
 
     public override void OnUpgrade()
