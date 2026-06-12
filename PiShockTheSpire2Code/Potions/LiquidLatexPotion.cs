@@ -37,7 +37,7 @@ public class LiquidLatexPotion : CustomPotionModel
     {
         PotionModel.AssertValidForTargetedPotion(target);
         NCombatRoom.Instance?.PlaySplashVfx(target, new Color("222220"));
-        await PowerCmd.Apply<Insulation>(choiceContext, target, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, null);
+        await PowerCmd.Apply<Insulation>(target, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, null);
     }
     
 }

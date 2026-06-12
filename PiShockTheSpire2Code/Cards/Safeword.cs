@@ -39,7 +39,7 @@ public class Safeword() : CustomCardModel(0, CardType.Skill,
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<Insulation>(choiceContext, base.Owner.Creature, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, this);
+        await PowerCmd.Apply<Insulation>(base.Owner.Creature, base.DynamicVars["Insulation"].BaseValue, base.Owner.Creature, this);
     }
 
     public override void OnUpgrade()

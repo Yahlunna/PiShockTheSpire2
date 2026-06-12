@@ -52,7 +52,7 @@ public class PishockCollar() : CustomRelicModel
         return Task.CompletedTask;
     }
     
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
     {
         if (player == base.Owner && combatState.RoundNumber == 1)
         {
@@ -60,7 +60,7 @@ public class PishockCollar() : CustomRelicModel
             list.Add(base.Owner.Creature.CombatState?.CreateCard<Safeword>(base.Owner));
             Flash();
             
-            await CardPileCmd.AddGeneratedCardsToCombat(list!, PileType.Hand, base.Owner);
+            await CardPileCmd.AddGeneratedCardsToCombat(list!, PileType.Hand, true, CardPilePosition.Bottom);
         }
     }
     
@@ -83,7 +83,7 @@ public class PishockCollar() : CustomRelicModel
       IEnumerable<Creature> participants)
      * 
      */
-    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
         if (side == base.Owner.Creature.Side && !Config.TriggerSelfDamage) {
             _damageTakenThisTurn = 0;
