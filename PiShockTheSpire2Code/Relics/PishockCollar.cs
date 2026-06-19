@@ -42,6 +42,10 @@ public class PishockCollar() : CustomRelicModel
     
     public override Task AfterObtained()
     {
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("Obtained PiShock Collar.");
+        }
         PiShockTheSpire2_ActiveAct = base.Owner.RunState.CurrentActIndex;
         if (Config.HealingVibrates) {
             int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
@@ -60,6 +64,11 @@ public class PishockCollar() : CustomRelicModel
             list.Add(base.Owner.Creature.CombatState?.CreateCard<Safeword>(base.Owner));
             Flash();
             
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Generating Safeword via PiSHock Relic...");
+            }
+            
             await CardPileCmd.AddGeneratedCardsToCombat(list!, PileType.Hand, base.Owner);
         }
     }
@@ -68,28 +77,51 @@ public class PishockCollar() : CustomRelicModel
     {
         if (CombatManager.Instance.IsInProgress && target == base.Owner.Creature && result.UnblockedDamage > 0) {
             _damageTakenThisTurn += result.UnblockedDamage;
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Taking damage in combat - Current damage taken this turn: " + _damageTakenThisTurn + ".");
+            }
         }
         else if (target == base.Owner.Creature && result.UnblockedDamage > 0) {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Taking damage outside combat - Damage taken is: " + _damageTakenThisTurn + ".");
+            }
             _ = TriggerShock(
                 CalculateOperationDuration(result.UnblockedDamage, base.Owner.Creature.MaxHp),
                 CalculateOperationIntensity(result.UnblockedDamage, base.Owner.Creature.MaxHp));
         }
         return Task.CompletedTask;
     }
-    /*
-     *public virtual Task AfterSideTurnEnd(
-      PlayerChoiceContext choiceContext,
-      CombatSide side,
-      IEnumerable<Creature> participants)
-     * 
-     */
+    
     public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == base.Owner.Creature.Side && !Config.TriggerSelfDamage) {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("No stricter penalties - Evading Shocker discharges in the player's turn.");
+            }
             _damageTakenThisTurn = 0;
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Reset damage taken.");
+            }
             return Task.CompletedTask;
         }
         if ( _damageTakenThisTurn > 0 ) {
+            
+            if (Config.VerboseLogs)
+            {
+                if (side == base.Owner.Creature.Side)
+                {
+                    MainFile.Logger.Info("Stricter penalties enabled - Shocker triggering at the end of the player's turn.");
+                }
+                else
+                {
+                    MainFile.Logger.Info("Triggering shocker damage taken on enemy turn.");
+                }
+            }
+            
             if (!base.Owner.Creature.HasPower<Insulation>()) {
                 Flash();
                 
@@ -97,6 +129,10 @@ public class PishockCollar() : CustomRelicModel
                     CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
                     CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
             }
+        }
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("Reset damage taken.");
         }
         _damageTakenThisTurn = 0;
         return Task.CompletedTask;
@@ -122,8 +158,16 @@ public class PishockCollar() : CustomRelicModel
 
     public override Task AfterRestSiteHeal(Player player, bool isMimicked)
     {
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("Rest site heal...");
+        }
         if (Config.HealingVibrates && player == base.Owner)
         {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Positive feedback enabled! Triggering vibration");
+            }
             int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
             int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
 
@@ -137,6 +181,11 @@ public class PishockCollar() : CustomRelicModel
         if (Config.HealingVibrates && PiShockTheSpire2_ActiveAct != base.Owner.RunState.CurrentActIndex)
         {
             PiShockTheSpire2_ActiveAct = base.Owner.RunState.CurrentActIndex;
+            
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Entering new act! Triggering vibration - This should only happen in Ancient rooms");
+            }
             
             int midRangeDuration = (int)( (Config.MaxDuration + Config.MinDuration)/2 );
             int midRangeIntensity= (int)( (Config.MaxIntensity + Config.MinIntensity)/2 );;
@@ -158,6 +207,11 @@ public class PishockCollar() : CustomRelicModel
     {
         if (LocalContext.IsMe(base.Owner))
         {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("------------------------------------------------------------.");
+                MainFile.Logger.Info("Attempting a vibration with an intensity of " + intensity + " and a duration of " + duration + ".");
+            }
             await PiShockApiHandler.PostShockerOpAsync(1, duration, intensity);
         }
     }
@@ -166,6 +220,11 @@ public class PishockCollar() : CustomRelicModel
     {
         if (LocalContext.IsMe(base.Owner))
         {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("------------------------------------------------------------.");
+                MainFile.Logger.Info("Attempting a vibration with a duration of " + duration + ".");
+            }
             await PiShockApiHandler.PostShockerOpAsync(2, duration, 0);
         }
     }
@@ -174,6 +233,10 @@ public class PishockCollar() : CustomRelicModel
     {
         if (LocalContext.IsMe(base.Owner))
         {
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Shock in tandem requested (total:  " + instances + " times).");
+            }
             for (int i = 0; i < instances; i++)
             {
                 await TriggerShock((int)Config.MaxDuration, (int)Config.MaxIntensity); 
