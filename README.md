@@ -32,7 +32,7 @@ Extract the files from "PiShockTheSpire2.zip" into this folder. You will also ne
 ![](https://i.imgur.com/uQXrXvu.png)
 
 - **Step 3:** Execute the game and make sure the mod is running:
-- 
+
 You can see your list of mods at `Settings > General > Modding`, by clicking in the Mod Settings button.
 
 ![](https://i.imgur.com/sMEKwjR.png)
