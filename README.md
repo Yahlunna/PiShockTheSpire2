@@ -58,7 +58,7 @@ You can find your **Username** and how to generate API Keys in your PiShock Acco
 
 You can find your **Shocker ID** in the PiShock Vault. Please, keep in mind you will need to use your Shocker ID, **not** your Hub ID.
 
-![]([https://steamcommunity.com/sharedfiles/filedetails/?id=3747608882](https://i.imgur.com/kufZzvc.png))
+![](https://i.imgur.com/kufZzvc.png)
 
 Feel free to adjust all the other given parameters to your liking to adapt the mod to your prefered expereince.
 
