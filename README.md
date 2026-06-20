@@ -42,24 +42,25 @@ This should look similar to this:
 
 > [!Warning]
 > If you mod Slay The Spire 2, your save file will be safely stored and you will start your modded StS2 with a different one.
-> To restore your old safefile, simply disable all your mods in the menu above, and reset the game.
+> To restore your main save file, simply disable all your mods in the menu above, and reset the game.
 
 **Step 3:** Configure the mod
 
 You can now open the Mod Settings menu and configure PiShock The Spire 2 to link it with a PiShock Shocker
 
-The configuration menu looks like this:
+The configuration menu will looks similar to this:
 
 ![](https://i.imgur.com/ju8EZS3.png)
 
-Feel free to adjust the parameters to your liking.
-The main 3 parameters you need to run this mod are your **Username**, an **API Key** for your account, and the **ID of the Shocker** you want to use.
+You will need to fill 3 parameters in order to run this mod: your **Username**, an **API Key** for your account, and the **ID of the Shocker** you want to use.
 
-You can find your username and how to generate api keys in your PiShock Account.
+You can find your **Username** and how to generate API Keys in your PiShock Account.
 
-You can find your Shocker ID in the PiShock Vault. Please, keep in mind you will need to use your Shocker ID, **not** your Hub ID.
+You can find your **Shocker ID** in the PiShock Vault. Please, keep in mind you will need to use your Shocker ID, **not** your Hub ID.
 
-![](https://steamcommunity.com/sharedfiles/filedetails/?id=3747608882)
+![]([https://steamcommunity.com/sharedfiles/filedetails/?id=3747608882](https://i.imgur.com/kufZzvc.png))
+
+Feel free to adjust all the other given parameters to your liking to adapt the mod to your prefered expereince.
 
 
 **Step 4 (Optional):** Debugging
@@ -83,4 +84,4 @@ The command also opens your ingame log folder automatically with the following c
 
 This way, you dont need to search for your SlayTheSpire2\logs folder.
 
-Feel free to use the "Verbose Logs" options to find additional info on where the mod might be experiencign issues.
+Feel free to use the "Verbose Logs" option in the mod settings in order to find additional info on where the mod might be experiencign issues!
