@@ -31,7 +31,8 @@ Extract the files from "PiShockTheSpire2.zip" into this folder. You will also ne
 
 ![](https://i.imgur.com/uQXrXvu.png)
 
-**Step 2:** Execute the game and make sure the mod is running:
+- **Step 3:** Execute the game and make sure the mod is running:
+- 
 You can see your list of mods at `Settings > General > Modding`, by clicking in the Mod Settings button.
 
 ![](https://i.imgur.com/sMEKwjR.png)
@@ -44,7 +45,7 @@ This should look similar to this:
 > If you mod Slay The Spire 2, your save file will be safely stored and you will start your modded StS2 with a different one.
 > To restore your main save file, simply disable all your mods in the menu above, and reset the game.
 
-**Step 3:** Configure the mod
+**Step 4:** Configure the mod
 
 You can now open the Mod Settings menu and configure PiShock The Spire 2 to link it with a PiShock Shocker
 
@@ -63,7 +64,7 @@ You can find your **Shocker ID** in the PiShock Vault. Please, keep in mind you 
 Feel free to adjust all the other given parameters to your liking to adapt the mod to your prefered expereince.
 
 
-**Step 4 (Optional):** Debugging
+**Step 5 (optional):** Debugging
 
 You can use the Test current Shocker button in The PiShockTheSpire2 menu to check if the Shoker has linked properly with the game.
 Pressing the test button will try make the Shocker vibrate at the max intensity and duration that you have configured.
