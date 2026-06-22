@@ -20,7 +20,7 @@ We recomend playing in the stable version of the mod, but if you wish to play th
 
 - **Step 1:** Download the intended version of the mod listed in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases).
 
-Select between "Stable version" if you are playing normaly, or "Beta-version" if you wish to play in the beta version of the game. Keep in mind the beta branch is always changing, and its prone to break stuff! If beta-branch isnt working, please use the stable version until the beta version us properly updated (this could take a few days)
+Select between "Stable Version" if you are playing normaly, or "Beta Version" if you wish to play in the beta version of the game. Keep in mind the beta branch is always changing, and its prone to break stuff! If beta-branch isnt working, please use the stable version until the beta version us properly updated (this could take a few days)
 This mod uses BaseLib as a dependency. You can download BaseLib from [here](https://github.com/Alchyr/BaseLib-StS2). 
 
 - **Step 2:** Install the mod.
