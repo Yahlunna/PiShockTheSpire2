@@ -122,13 +122,10 @@ public class PishockCollar() : CustomRelicModel
                 }
             }
             
-            if (!base.Owner.Creature.HasPower<Insulation>()) {
-                Flash();
-                
-                _ = TriggerShock(
-                    CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
-                    CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
-            }
+            _ = TriggerShock(
+                CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
+                CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
+            
         }
         if (Config.VerboseLogs)
         {
@@ -142,14 +139,10 @@ public class PishockCollar() : CustomRelicModel
     {
         if (_damageTakenThisTurn > 0)
         {
-            if (!base.Owner.Creature.HasPower<Insulation>())
-            {
-                Flash();
-                
-                _ = TriggerShock(
-                    CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
-                    CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
-            }
+            _ = TriggerShock(
+                CalculateOperationDuration(_damageTakenThisTurn, base.Owner.Creature.MaxHp),
+                CalculateOperationIntensity(_damageTakenThisTurn, base.Owner.Creature.MaxHp));
+            
         }
         _damageTakenThisTurn = 0;
 
@@ -199,7 +192,17 @@ public class PishockCollar() : CustomRelicModel
     {
         if (LocalContext.IsMe(base.Owner)){
             DebugDump(intensity, duration);
-            await PiShockApiHandler.PostShockerOpAsync(0, duration, intensity);
+
+            if (!base.Owner.Creature.HasPower<Insulation>() || Config.FaultyInsulation)
+            {
+                if (Config.VerboseLogs)
+                {
+                    MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + duration + ".");
+                }
+
+                Flash();
+                await PiShockApiHandler.GenerateShockerOpsAsync(0, duration, intensity);
+            }
         }
     }
 
@@ -212,7 +215,9 @@ public class PishockCollar() : CustomRelicModel
                 MainFile.Logger.Info("------------------------------------------------------------.");
                 MainFile.Logger.Info("Attempting a vibration with an intensity of " + intensity + " and a duration of " + duration + ".");
             }
-            await PiShockApiHandler.PostShockerOpAsync(1, duration, intensity);
+            
+            Flash();
+            await PiShockApiHandler.GenerateShockerOpsAsync(1, duration, intensity);
         }
     }
     
@@ -223,9 +228,11 @@ public class PishockCollar() : CustomRelicModel
             if (Config.VerboseLogs)
             {
                 MainFile.Logger.Info("------------------------------------------------------------.");
-                MainFile.Logger.Info("Attempting a vibration with a duration of " + duration + ".");
+                MainFile.Logger.Info("Attempting a beep with a duration of " + duration + ".");
             }
-            await PiShockApiHandler.PostShockerOpAsync(2, duration, 0);
+            
+            Flash();
+            await PiShockApiHandler.GenerateShockerOpsAsync(2, duration, 0);
         }
     }
     
@@ -285,8 +292,9 @@ public class PishockCollar() : CustomRelicModel
         if (Config.VerboseLogs)
         {
             MainFile.Logger.Info("------------------------------------------------------------.");
-            MainFile.Logger.Info("Registered unblocked damage taken amounting for " + _damageTakenThisTurn + ".");
-            MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + duration + ".");
+            MainFile.Logger.Info("Registered total unblocked damage taken at the end of turn amounting for: " + _damageTakenThisTurn + ".");
+            MainFile.Logger.Info("Is the player insulated to avoid damage?: " + base.Owner.Creature.HasPower<Insulation>() + ".");
+            MainFile.Logger.Info("Is faulty insulation ON?: " + Config.FaultyInsulation + ".");
         }
     }
 

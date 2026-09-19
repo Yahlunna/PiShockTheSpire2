@@ -23,7 +23,6 @@ public class Safeword() : CustomCardModel(0, CardType.Skill,
     public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromPower<Insulation>()];
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain, CardKeyword.Exhaust];
     
-    
     /*
      * Apply<T>(
       PlayerChoiceContext choiceContext,

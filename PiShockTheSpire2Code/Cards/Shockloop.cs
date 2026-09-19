@@ -39,11 +39,8 @@ public class Shockloop() : CustomCardModel(0, CardType.Skill,
                 select c;
             foreach (Creature crtr in enumerable)
             {
-                if (!crtr.HasPower<Insulation>())
-                {
-                    PishockCollar? aux = crtr.Player?.GetRelic<PishockCollar>();
-                    await aux?.TriggerMultiShock(nOfMultiShocks)!;
-                }
+                PishockCollar? aux = crtr.Player?.GetRelic<PishockCollar>();
+                await aux?.TriggerMultiShock(nOfMultiShocks)!;
             }
         }
     }

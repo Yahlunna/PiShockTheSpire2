@@ -20,11 +20,11 @@ class DeathPenaltyHandler {
         // TODO: avoid triggering multiple times during online play.
             if (isVictory && Config.HealingVibrates)
             {
-                _ = PiShockApiHandler.PostShockerOpAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
+                _ = PiShockApiHandler.GenerateShockerOpsAsync(1, (int)Config.MaxDuration, (int)Config.MaxIntensity);
             }
             else if (!isVictory && Config.DeathPenalty)
             {
-                _ = PiShockApiHandler.PostShockerOpAsync(0, (int)Config.MaxDuration, (int)Config.MaxIntensity);
+                _ = PiShockApiHandler.GenerateShockerOpsAsync(0, (int)Config.MaxDuration, (int)Config.MaxIntensity);
             }
         
     }
