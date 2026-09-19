@@ -3,82 +3,68 @@
 > [!CAUTION]
 > The contents of this repository are related with the use of an adult themed toy with the explicit purpose of inflicting pain. Viewer discretion is advised.
 
-Source code for the PiShock The Spire 2 mod.
-
-> [!Note]
-> The following text is just a wonky temporal installation guide for this mod until the StS2 Community Workshop is ready. 
-
-
-## Quick Setup Guide for PiShockTheSpire2 beta
-
 > [!Warning]
 > This mod is in beta. Some errors are expected to happen while using it. Feel free to report any issues or give any feedback you want.
 
+Source code for the PiShock The Spire 2 mod.
+
+
+## Quick Setup Guide for PiShockTheSpire2 
+
+> [!Note]
+> If you play on steam, you can download PiShock The Spire 2 directly from the Workshop: [Click here](https://steamcommunity.com/sharedfiles/filedetails/?id=3747608882).
+
 - **Step 0 (optional):** Set your game in the **public-beta** branch.
 
-If you are having issues running the mod, switching to the beta branch of StS2 might help to solve some of them.
+We recomend playing in the stable version of the mod, but if you wish to play the beta version of the game, the mod will have a beta-branch release version to support it.
 
-![](https://i.imgur.com/RhH2gpo.png)
+- **Step 1:** Download the intended version of the mod listed in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases).
 
-- **Step 1:** Download the last version of the mod listed in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases).
-
-This mod uses BaseLib as a dependency. You can either download BaseLib from [here](https://github.com/Alchyr/BaseLib-StS2) before installing this mod, or download the PiShockTheSpire mod with its BaseLib dependency directly in the [Releases section](https://github.com/Yahlunna/PiShockTheSpire2/releases). 
-
-If you are following this guide, this is probably your first time installing a StS2 mod manually, so I advise you to just download the "PiShockTheSpire2withBaseLibDependency.zip" asset with the solved dependency on it.
-Otherwise, if you already own BaseLib, you can just download the mod implementation in the "PiShockTheSpire2withBaseLibDependency.zip" asset.
-
-![](https://i.imgur.com/3uQ3Qhu.png)
-
-
+Select between "Stable Version" if you are playing normaly, or "Beta Version" if you wish to play in the beta version of the game. Keep in mind the beta branch is always changing, and its prone to break stuff! If beta-branch isnt working, please use the stable version until the beta version us properly updated (this could take a few days)
+This mod uses BaseLib as a dependency. You can download BaseLib from [here](https://github.com/Alchyr/BaseLib-StS2). 
 
 - **Step 2:** Install the mod.
 
-First, browse into your StS2 installation folder. If you are in steam, you can find it here:
-
-![](https://i.imgur.com/HS6Mt47.png)
-
-Once there, create a "mods" folder.
-
-![](https://i.imgur.com/dJ0nFLA.png)
+First, browse into your StS2 installation folder. Once there, create a "mods" folder.
 
 Extract the files from "PiShockTheSpire2.zip" into this folder. You will also need to keep BaseLib here. A successful instalation should look like this:
 
 ![](https://i.imgur.com/uQXrXvu.png)
 
-**Step 2:** Execute the game and make sure the mod is running:
+- **Step 3:** Execute the game and make sure the mod is running:
+
 You can see your list of mods at `Settings > General > Modding`, by clicking in the Mod Settings button.
 
 ![](https://i.imgur.com/sMEKwjR.png)
 
-This should look like this:
+This should look similar to this:
 
 ![](https://i.imgur.com/AOzuDsT.png)
 
 > [!Warning]
-> If you mod Slay The Spire 2, your save fille will be safely stored and you will start your modded StS2 with a different one.
-> To restore your old safefile, simply disable all your mods in the menu above, and reset the game.
+> If you mod Slay The Spire 2, your save file will be safely stored and you will start your modded StS2 with a different one.
+> To restore your main save file, simply disable all your mods in the menu above, and reset the game.
 
-**Step 3:** Configure the mod
+- **Step 4:** Configure the mod
 
 You can now open the Mod Settings menu and configure PiShock The Spire 2 to link it with a PiShock Shocker
 
-The configuration menu looks like this:
+The configuration menu will looks similar to this:
 
 ![](https://i.imgur.com/ju8EZS3.png)
 
-Feel free to adjust the parameters to your liking.
-The main 3 parameters you need to run this mod are your **Username**, an **API Key** for your account, and the **ID of the Shocker** you want to use.
+You will need to fill 3 parameters in order to run this mod: your **Username**, an **API Key** for your account, and the **ID of the Shocker** you want to use.
 
-You can find your username and how to generate api keys in your PiShock Account.
+You can find your **Username** and how to generate API Keys in your PiShock Account.
 
-![](https://i.imgur.com/WWCiTY5.png)
+You can find your **Shocker ID** in the PiShock Vault. Please, keep in mind you will need to use your Shocker ID, **not** your Hub ID.
 
-You can find your Shocker ID in the PiShock Vault. Please, keep in mind you will need to use your Shocker ID, **not** your Hub ID.
+![](https://i.imgur.com/kufZzvc.png)
 
-![](https://i.imgur.com/JpVaSw7.png)
+Feel free to adjust all the other given parameters to your liking to adapt the mod to your prefered expereince.
 
 
-**Step 4 (Optional):** Debugging
+- **Step 5 (optional):** Debugging
 
 You can use the Test current Shocker button in The PiShockTheSpire2 menu to check if the Shoker has linked properly with the game.
 Pressing the test button will try make the Shocker vibrate at the max intensity and duration that you have configured.
@@ -98,3 +84,5 @@ The command also opens your ingame log folder automatically with the following c
 > open logs
 
 This way, you dont need to search for your SlayTheSpire2\logs folder.
+
+Feel free to use the "Verbose Logs" option in the mod settings in order to find additional info on where the mod might be experiencign issues!
