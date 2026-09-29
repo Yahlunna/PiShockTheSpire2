@@ -59,10 +59,10 @@ public class Config : SimpleModConfig
     {
         base.SetupConfigUI(optionContainer);
 
-        var passwordRow = optionContainer.GetNodeOrNull<NConfigOptionRow>($"%{nameof(API_Key)}");
-        if (passwordRow?.SettingControl is NConfigLineEdit API_password)
+        var apiKeyLineEditNode = optionContainer.GetNodeOrNull<NConfigOptionRow>($"%{nameof(API_Key)}");
+        if (apiKeyLineEditNode?.SettingControl is NConfigLineEdit apiKeyLineEdit)
         {
-            API_password.SetSecret(true);
+            apiKeyLineEdit.SetSecret(true);
         }
     }
 
