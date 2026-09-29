@@ -2,10 +2,8 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code.Utils;
 
 public static class ShockUtil
 {
-    /// <summary>
-    /// Do a shock/vibrate/beep operation for select shockers.
-    /// </summary>
-    public static async Task DoOperationAsync(Op op, IEnumerable<string> shockerIds, TimeSpan duration, int intensity = 0)
+    // Do a shock/vibrate/beep operation for a select shocker.
+    public static Task DoOperationAsync(Op op, IEnumerable<string> shockerIds, TimeSpan duration, int intensity = 0)
     {
         if (Config.VibrateOnly)
         {
@@ -14,7 +12,7 @@ public static class ShockUtil
 
         if (!Config.IsValid())
         {
-            return;
+            throw (new Exception("Invalid configuration settings Error! Review your mod configuration menú"));
         }
         
         intensity = RefineIntensity(intensity);
@@ -34,7 +32,8 @@ public static class ShockUtil
         MainFile.Logger.Info($"{backend.BackendName}: sending {op} for {duration.TotalMilliseconds}ms with intensity {intensity}");
         try
         {
-            await backend.DoOperationAsync(op, shockerIds, duration, intensity);
+            _ = backend.DoOperationAsync(op, shockerIds, duration, intensity);
+            return Task.CompletedTask;
         }
         catch (Exception e)
         {
@@ -42,13 +41,12 @@ public static class ShockUtil
             throw;
         }
     }
-
-    /// <summary>
-    /// Do a shock/vibrate/beep operation for all shockers.
-    /// </summary>
-    public static async Task DoOperationForAllAsync(Op op, TimeSpan duration, int intensity = 0)
+    
+    // Do a shock/vibrate/beep operation for all shockers.
+    public static Task DoOperationForAllAsync(Op op, TimeSpan duration, int intensity = 0)
     {
-        await DoOperationAsync(op, Config.GetAllShockerIds(), duration, intensity);
+        _ = DoOperationAsync(op, Config.GetAllShockerIds(), duration, intensity);
+        return Task.CompletedTask;
     }
 
     private static IShockBackend GetBackend()
@@ -58,7 +56,7 @@ public static class ShockUtil
         {
             32 or 36 => new PiShockApiHandler(), // PiShock UUID, with or without the 4 dashes.
             64 => new OpenShockApiHandler(), // OpenShock Token.
-            _ => throw new Exception("Unable to determine backend from API key")
+            _ => throw new Exception("Unable to determine backend from API Key's lenght. Are you sure the API Key is correct?")
         };
     }
     
