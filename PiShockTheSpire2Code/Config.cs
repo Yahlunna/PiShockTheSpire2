@@ -1,3 +1,4 @@
+using System.Numerics;
 using PiShockTheSpire2.PiShockTheSpire2Code.Utils;
 
 namespace PiShockTheSpire2.PiShockTheSpire2Code;
@@ -24,16 +25,16 @@ public class Config : SimpleModConfig
     public static string Additional_Shocker_ID_4 { get; set; } = "";
 
     [ConfigSection("ShockerConfig")]
-    [ConfigSlider(1, 100, Format = "{0} \u26a1")]
+    [ConfigSlider(1f, 100f, Format = "{0} \u26a1")]
     public static double MinIntensity { get; set; } = 20f;
 
-    [ConfigSlider(1, 100, Format = "{0} \u26a1")]
+    [ConfigSlider(1f, 100f, Format = "{0} \u26a1")]
     public static double MaxIntensity { get; set; } = 100f;
 
-    [ConfigSlider(0.3, 9, 0.1, Format = "{0}  s ")]
+    [ConfigSlider(0.5f, 14f, 0.5f, Format = "{0}  s ")]
     public static double MinDuration { get; set; } = 1f;
 
-    [ConfigSlider(0.3, 15, 0.1, Format = "{0}  s ")]
+    [ConfigSlider(0.5f, 15f, 0.5f, Format = "{0}  s ")]
     public static double MaxDuration { get; set; } = 10f;
 
     public static bool AlwaysMaxPower { get; set; } = false;
