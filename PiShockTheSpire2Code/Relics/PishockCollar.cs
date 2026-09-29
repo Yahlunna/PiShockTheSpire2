@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
@@ -32,7 +31,7 @@ public class PishockCollar() : CustomRelicModel
     public override string PackedIconOutlinePath => "pishockcollar_outline.png".RelicImagePath();
     public override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
 
-    private int _damageTakenThisTurn = 0;
+    private int _damageTakenThisTurn;
     private int _piShockTheSpire2ActiveAct = -1;
 
     [SavedProperty]
@@ -58,7 +57,6 @@ public class PishockCollar() : CustomRelicModel
         {
             int midRangeDuration = (int)((Config.MaxDuration + Config.MinDuration) / 2);
             int midRangeIntensity = (int)((Config.MaxIntensity + Config.MinIntensity) / 2);
-            ;
 
             _ = TriggerVibrate(midRangeDuration, midRangeIntensity);
         }
@@ -163,7 +161,6 @@ public class PishockCollar() : CustomRelicModel
         _damageTakenThisTurn = 0;
 
         return Task.CompletedTask;
-        ;
     }
 
     public override Task AfterRestSiteHeal(Player player, bool isMimicked)
