@@ -16,16 +16,17 @@ public class PiShockApiHandler : IShockBackend
         Client.DefaultRequestHeaders.Add("User-Agent", "PiShockTheSpire/1.0");
     }
     
-    public async Task DoOperationAsync(Op operation, IEnumerable<string> shockerIds, TimeSpan duration, int intensity = 0)
+    public Task DoOperationAsync(Op operation, IEnumerable<string> shockerIds, TimeSpan duration, int intensity = 0)
     {
         foreach (var shockerId in shockerIds)
         {
             MainFile.Logger.Info("Getting ready to call Shocker with ID: " + shockerId);
-            _ = ShockerOpsAsync(operation, shockerId, duration, intensity);
+            _ = PiShockerOpsAsync(operation, shockerId, duration, intensity);
         }
+        return Task.CompletedTask;
     }
     
-    private static async Task ShockerOpsAsync(Op operation, string shockerId, TimeSpan duration, int intensity)
+    private static async Task PiShockerOpsAsync(Op operation, string shockerId, TimeSpan duration, int intensity)
     {
         var piShockUrl = $"https://api.pishock.com/Shockers/OperateById/{shockerId}";
         
