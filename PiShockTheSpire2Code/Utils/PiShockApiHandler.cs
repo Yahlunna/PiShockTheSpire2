@@ -20,7 +20,11 @@ public class PiShockApiHandler : IShockBackend
     {
         foreach (var shockerId in shockerIds)
         {
-            MainFile.Logger.Info("Getting ready to call Shocker with ID: " + shockerId);
+            if (Config.VerboseLogs)
+            {
+                MainFile.Logger.Info("Getting ready to call Shocker with ID: " + shockerId);
+            }
+
             _ = PiShockerOpsAsync(operation, shockerId, duration, intensity);
         }
         return Task.CompletedTask;
@@ -47,13 +51,15 @@ public class PiShockApiHandler : IShockBackend
         };
 
         HttpResponseMessage response = await Client.PostAsJsonAsync(piShockUrl, payload);
-
-        // PiShock The Spire API Log:
+        
         response.EnsureSuccessStatusCode();
         string responseString = await response.Content.ReadAsStringAsync();
         int statusCode = (int)response.StatusCode;
         string statusCodeType = response.StatusCode.ToString();
 
-        MainFile.Logger.Info("Request Success! Status code " + statusCode + ": " + statusCodeType + " -> " + responseString);
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("Request Success! Status code " + statusCode + ": " + statusCodeType + " -> " + responseString);
+        }
     }
 }

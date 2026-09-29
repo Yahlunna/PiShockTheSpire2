@@ -56,7 +56,7 @@ public static class ShockUtil
         {
             32 or 36 => new PiShockApiHandler(), // PiShock UUID, with or without the 4 dashes.
             64 => new OpenShockApiHandler(), // OpenShock Token.
-            _ => throw new Exception("Unable to determine backend from API Key's lenght. Are you sure the API Key is correct?")
+            _ => throw new Exception("Unable to determine backend from API Key's lenght. Are you sure the API Key in your config file is correct?")
         };
     }
     

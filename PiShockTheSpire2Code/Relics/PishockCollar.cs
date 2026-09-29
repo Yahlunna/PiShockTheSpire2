@@ -132,14 +132,9 @@ public class PishockCollar() : CustomRelicModel
         {
             if (Config.VerboseLogs)
             {
-                if (side == base.Owner.Creature.Side)
-                {
-                    MainFile.Logger.Info("Stricter penalties enabled - Shocker triggering at the end of the player's turn.");
-                }
-                else
-                {
-                    MainFile.Logger.Info("Triggering shocker damage taken on enemy turn.");
-                }
+                MainFile.Logger.Info(side == base.Owner.Creature.Side
+                    ? "Stricter penalties enabled - Shocker triggering at the end of the player's turn."
+                    : "Triggering shocker damage taken on enemy turn.");
             }
 
             _ = TriggerShock(
@@ -222,11 +217,9 @@ public class PishockCollar() : CustomRelicModel
 
             if (!base.Owner.Creature.HasPower<Insulation>() || Config.FaultyInsulation)
             {
-                if (Config.VerboseLogs)
-                {
-                    MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + durationS + "s.");
-                }
-
+                MainFile.Logger.Info("------------------------------------------------------------.");
+                MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + durationS + "s.");
+                
                 Flash();
                 await ShockUtil.DoOperationForAllAsync(Op.Zap, TimeSpan.FromSeconds(durationS), intensity);
             }
@@ -237,11 +230,8 @@ public class PishockCollar() : CustomRelicModel
     {
         if (LocalContext.IsMe(base.Owner))
         {
-            if (Config.VerboseLogs)
-            {
                 MainFile.Logger.Info("------------------------------------------------------------.");
                 MainFile.Logger.Info("Attempting a vibration with an intensity of " + intensity + " and a duration of " + durationS + "s.");
-            }
 
             Flash();
             //await PiShockApiHandler.GenerateShockerOpsAsync(1, duration, intensity);
