@@ -11,7 +11,7 @@ public class Config : SimpleModConfig
 {
     [ConfigSection("ApiConfig")]
     [ConfigTextInput]
-    public static string API_Key { get; set; } = "undefined";
+    public static string API_Key { get; set; } = "";
     
     [ConfigHideInUI]
     public static string OpenShockApiUrl { get; set; } = ""; // For self-hosted OpenShock.
