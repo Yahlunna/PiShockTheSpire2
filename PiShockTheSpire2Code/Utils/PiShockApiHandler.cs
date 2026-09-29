@@ -16,8 +16,9 @@ public class PiShockApiHandler : IShockBackend
         Client.DefaultRequestHeaders.Add("User-Agent", "PiShockTheSpire/1.0");
     }
     
-    public Task DoOperationAsync(Op operation, List<string>  shockerIds, TimeSpan duration, int intensity = 0)
+    public Task DoOperationAsync(Op operation, List<string> shockerIds, TimeSpan duration, int intensity = 0)
     {
+        Random.Shared.Shuffle(System.Runtime.InteropServices.CollectionsMarshal.AsSpan(shockerIds));
         foreach (var shockerId in shockerIds)
         {
             if (Config.VerboseLogs)
