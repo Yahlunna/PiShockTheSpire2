@@ -209,7 +209,7 @@ public class PishockCollar() : CustomRelicModel
         return Task.CompletedTask;
     }
 
-    public async Task TriggerShock(int durationS, int intensity)
+    public Task TriggerShock(int durationS, int intensity)
     {
         if (LocalContext.IsMe(base.Owner))
         {
@@ -221,12 +221,13 @@ public class PishockCollar() : CustomRelicModel
                 MainFile.Logger.Info("Attempting a shock with an intensity of " + intensity + " and a duration of " + durationS + "s.");
                 
                 Flash();
-                await ShockUtil.DoOperationForAllAsync(Op.Zap, TimeSpan.FromSeconds(durationS), intensity);
+                ShockUtil.DoOperationForAllAsync(Op.Zap, TimeSpan.FromSeconds(durationS), intensity);
             }
         }
+        return Task.CompletedTask;
     }
 
-    public async Task TriggerVibrate(int durationS, int intensity)
+    public Task TriggerVibrate(int durationS, int intensity)
     {
         if (LocalContext.IsMe(base.Owner))
         {
@@ -235,11 +236,12 @@ public class PishockCollar() : CustomRelicModel
 
             Flash();
             //await PiShockApiHandler.GenerateShockerOpsAsync(1, duration, intensity);
-            await ShockUtil.DoOperationForAllAsync(Op.Buzz, TimeSpan.FromSeconds(durationS), intensity);
+            ShockUtil.DoOperationForAllAsync(Op.Buzz, TimeSpan.FromSeconds(durationS), intensity);
         }
+        return Task.CompletedTask;
     }
 
-    public async Task TriggerBeep(int durationS)
+    public Task TriggerBeep(int durationS)
     {
         if (LocalContext.IsMe(base.Owner))
         {
@@ -250,8 +252,9 @@ public class PishockCollar() : CustomRelicModel
             }
 
             Flash();
-            await ShockUtil.DoOperationForAllAsync(Op.Beep, TimeSpan.FromSeconds(durationS));
+            ShockUtil.DoOperationForAllAsync(Op.Beep, TimeSpan.FromSeconds(durationS));
         }
+        return Task.CompletedTask;
     }
 
     public async Task TriggerMultiShock(int instances)
