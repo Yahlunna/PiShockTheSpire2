@@ -19,7 +19,11 @@ class AddRelicAtStart
         {
             foreach (Player player in runState.Players)
             {
-                MainFile.Logger.Info("Generating PiShock Collar Relic...");
+                if (Config.VerboseLogs)
+                {
+                    MainFile.Logger.Info("Generating PiShock Collar Relic...");
+                }
+
                 RelicModel myCustomRelic = ModelDb.Relic<PishockCollar>();
                 RelicCmd.Obtain(ModelDb.Relic<PishockCollar>().ToMutable(), player);
             }

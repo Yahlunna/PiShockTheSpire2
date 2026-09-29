@@ -48,8 +48,11 @@ public class OpenShockApiHandler : IShockBackend
         };
 
         var json = JsonSerializer.Serialize(payload);
-        MainFile.Logger.Info($"Request JSON: {json}");
-        
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info($"Request JSON: {json}");
+        }
+
         var message = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
@@ -65,6 +68,9 @@ public class OpenShockApiHandler : IShockBackend
         var statusCode = (int)response.StatusCode;
         var statusCodeType = response.StatusCode.ToString();
 
-        MainFile.Logger.Info("Request Success! Status code " + statusCode + ": " + statusCodeType + " -> " + responseString);
+        if (Config.VerboseLogs)
+        {
+            MainFile.Logger.Info("Request Success! Status code " + statusCode + ": " + statusCodeType + " -> " + responseString);
+        }
     }
 }
