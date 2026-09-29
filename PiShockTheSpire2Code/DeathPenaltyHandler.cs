@@ -19,7 +19,6 @@ class DeathPenaltyHandler
     [HarmonyPostfix]
     static void Postfix(bool isVictory)
     {
-        // TODO: avoid triggering multiple times during online play.
         if (isVictory && Config.HealingVibrates)
         {
             _ = ShockUtil.DoOperationForAllAsync(Op.Buzz, TimeSpan.FromSeconds(Config.MaxDuration), (int)Config.MaxIntensity);
