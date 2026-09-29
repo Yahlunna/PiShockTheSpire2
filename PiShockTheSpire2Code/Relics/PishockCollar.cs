@@ -26,11 +26,11 @@ namespace PiShockTheSpire2.PiShockTheSpire2Code.Relics;
 public class PishockCollar() : CustomRelicModel
 {
     public override RelicRarity Rarity => RelicRarity.Starter;
-    protected override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Safeword>()];
+    public override IEnumerable<DynamicVar> CanonicalVars => [new CardsVar(1)];
+    public override IEnumerable<IHoverTip> ExtraHoverTips => [HoverTipFactory.FromCard<Safeword>()];
     public override string PackedIconPath => "pishockcollar.png".RelicImagePath();
-    protected override string PackedIconOutlinePath => "pishockcollar_outline.png".RelicImagePath();
-    protected override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
+    public override string PackedIconOutlinePath => "pishockcollar_outline.png".RelicImagePath();
+    public override string BigIconPath => "pishockcollar.png".BigRelicImagePath();
 
     private int _damageTakenThisTurn = 0;
     private int _piShockTheSpire2ActiveAct = -1;
