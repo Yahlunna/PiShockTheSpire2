@@ -25,7 +25,7 @@ public class OpenShockApiHandler : IShockBackend
         Client.DefaultRequestHeaders.Add("User-Agent", "PiShockTheSpire/1.0");
     }
     
-    public async Task DoOperationAsync(Op operation, IEnumerable<string> shockerIds, TimeSpan duration, int intensity = 0)
+    public async Task DoOperationAsync(Op operation, List<string>  shockerIds, TimeSpan duration, int intensity = 0)
     {
         var operationStr = operation switch
         {
